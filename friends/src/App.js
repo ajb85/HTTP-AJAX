@@ -1,25 +1,32 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import axios from "axios";
+import "./App.css";
+import FriendCard from "./components/FriendCard";
+import AddFriend from "./components/AddFriend";
 
 class App extends Component {
+  componentDidMount() {
+    this.updateFriendsState();
+  }
+
+  updateFriendsState = () => {
+    const url = "http://localhost:5000/friends";
+    axios
+      .get(url)
+      .then(res => this.setState({ friends: res.data }))
+      .catch(err => console.log(err));
+  };
   render() {
+    let friends = ["...Loading..."];
+    if (this.state && this.state.friends) {
+      friends = this.state.friends.map(friend => (
+        <FriendCard key={friend.id} friend={friend} />
+      ));
+    }
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        <AddFriend addFriend={this.updateFriendsState} />
+        <div className="friends">{friends}</div>
       </div>
     );
   }
