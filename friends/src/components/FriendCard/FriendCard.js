@@ -12,18 +12,13 @@ export default class FriendCard extends Component {
     this.state = { updating: false };
   }
 
-  postFriendUpdate = friend => {
+  deleteFriend(friend) {
     const url = `http://localhost:5000/friends/${friend.id}`;
     axios
-      .post(url, friend)
-      .then(res => console.log(res))
+      .delete(url, friend)
+      .then(res => this.props.getFriends())
       .catch(err => console.log(err));
-  };
-
-  handleSubmit = e => {
-    e.preventDefault();
-    console.log();
-  };
+  }
 
   render() {
     const { friend } = this.props;
@@ -59,7 +54,12 @@ export default class FriendCard extends Component {
           >
             {buttonText}
           </Button>
-          <Button variant="danger">Unfriend</Button>
+          <Button
+            variant="danger"
+            onClick={() => this.deleteFriend(this.props.friend)}
+          >
+            Unfriend
+          </Button>
         </Card.Body>
       </Card>
     );

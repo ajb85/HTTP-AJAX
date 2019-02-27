@@ -34,10 +34,7 @@ export default class AddFriend extends Component {
     const url = "http://localhost:5000/friends";
     axios
       .post(url, friend)
-      .then(res => {
-        console.log(res);
-        this.props.addFriend();
-      })
+      .then(res => this.props.getFriends())
       .catch(err => console.log(err));
   };
 
@@ -46,7 +43,6 @@ export default class AddFriend extends Component {
     axios
       .put(url, friend)
       .then(res => {
-        console.log(res);
         this.props.getFriends();
         this.props.toggleUpdating();
       })
