@@ -1,16 +1,3 @@
-form {
-  margin: auto;
-  margin-bottom: 15px;
-  width: 500px;
-  border: 1px solid #dfdfdf;
-  padding: 15px;
-  border-radius: 10px;
-}
-
-form .btn {
-  display: block;
-  margin: auto;
-}
 .friends {
   display: flex;
   flex-wrap: wrap;

@@ -39,13 +39,26 @@ export default class FriendCard extends Component {
     /* IF the user is updating! */
     if (this.state.updating) {
       buttonText = "Cancel";
-      cardContent = <AddFriend friend={friend} />;
+      cardContent = (
+        <AddFriend
+          friend={friend}
+          getFriends={this.props.getFriends}
+          toggleUpdating={() =>
+            this.setState({ updating: !this.state.updating })
+          }
+        />
+      );
     }
     return (
       <Card style={{ width: "300px" }}>
         <Card.Body>
           {cardContent}
-          <Button variant="primary">{buttonText}</Button>
+          <Button
+            variant="primary"
+            onClick={() => this.setState({ updating: !this.state.updating })}
+          >
+            {buttonText}
+          </Button>
           <Button variant="danger">Unfriend</Button>
         </Card.Body>
       </Card>

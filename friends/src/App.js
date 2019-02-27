@@ -6,10 +6,10 @@ import AddFriend from "./components/AddFriend";
 
 class App extends Component {
   componentDidMount() {
-    this.updateFriendsState();
+    this.getFriends();
   }
 
-  updateFriendsState = () => {
+  getFriends = () => {
     const url = "http://localhost:5000/friends";
     axios
       .get(url)
@@ -20,12 +20,16 @@ class App extends Component {
     let friends = ["...Loading..."];
     if (this.state && this.state.friends) {
       friends = this.state.friends.map(friend => (
-        <FriendCard key={friend.id} friend={friend} />
+        <FriendCard
+          key={friend.id}
+          friend={friend}
+          getFriends={this.getFriends}
+        />
       ));
     }
     return (
       <div className="App">
-        <AddFriend addFriend={this.updateFriendsState} />
+        <AddFriend getFriends={this.getFriends} />
         <div className="friends">{friends}</div>
       </div>
     );
