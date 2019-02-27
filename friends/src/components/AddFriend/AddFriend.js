@@ -7,7 +7,9 @@ import styles from "./AddFriend.module.scss";
 export default class AddFriend extends Component {
   constructor(props) {
     super(props);
-    let name, age, email;
+    let name = "";
+    let age = "";
+    let email = "";
     if (props.friend) {
       name = props.friend.name;
       age = props.friend.age;

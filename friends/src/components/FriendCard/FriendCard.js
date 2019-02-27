@@ -25,10 +25,10 @@ export default class FriendCard extends Component {
     /* IF the user is not updating! */
     let buttonText = "Update";
     let cardContent = [
-      <Card.Title>
+      <Card.Title key={`${friend.id}`}>
         {friend.name}, {friend.age}
       </Card.Title>,
-      <Card.Text>{friend.email}</Card.Text>
+      <Card.Text key={`${friend.name}${friend.id}`}>{friend.email}</Card.Text>
     ];
 
     /* IF the user is updating! */
